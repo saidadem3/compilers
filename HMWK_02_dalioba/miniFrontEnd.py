@@ -19,7 +19,18 @@ from ParseTree          import *
 # Lexical analysis section
 
 # Reserved words
-# TODO: Add something here ...
+reserved = {
+    'if'        : 'IF',
+    'then'      : 'THEN',
+    'else'      : 'ELSE',
+    'while'     : 'WHILE',
+    'end'       : 'END',
+    'elif'      : 'ELIF',
+    'do'        : 'DO',
+    'for'       : 'FOR',
+    'break'     : 'BREAK',
+    'continue'  : 'CONTINUE',
+ }
 
 tokens = [
   'ID', 'INT_LITERAL',
@@ -29,7 +40,7 @@ tokens = [
   'EXPONENTIATION',
   'LPAREN', 'RPAREN', 'SEMICOLON',
   'LBRACE', 'RBRACE'
-  ]
+  ] + reserved.values()
 
 # Tokens
 
@@ -48,7 +59,7 @@ t_SEMICOLON = r';'
 
 def t_ID( t ) :
   r'[a-zA-Z_][a-zA-Z0-9_]*'
-  # TODO: Add something here ...
+  t.type = reserved.get(t.value,'ID')
 
   return t
 
@@ -118,7 +129,8 @@ def p_semicolon_opt( p ) :
 # STATEMENTS ...
 
 # Break statement
-# TODO: Add something here ...
+def p_statement_break( p ):
+  'statement : break'
 
 # Continue statement
 # TODO: Add something here ...
