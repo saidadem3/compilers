@@ -1,0 +1,273 @@
+#----------------------------------------------------------------------
+Programming Assignment 02
+
+#----------------------------------------------------------------------
+Purpose:
+
+  * Demonstrate still better understanding of lexical and
+    syntactic analysis fundamentals by adding some statements to
+    the on-going ASL mini front end.
+
+  * Demonstrate even more Python programming skills.
+
+#----------------------------------------------------------------------
+Background:
+
+  * The current form of our simple language is given in the
+    ASL-version-0.txt file.
+
+  * The template included with this assignment shows the essential
+    structure for lexical and syntactic analysis stages of a
+    Ply-based scanning and parsing tool.  This is effectively the
+    reference solution for Homework 01.
+
+    It is absolutely in your best interest to start from this
+    template rather than using your own solution to HMWK 01, no
+    matter how good you think it was. :)
+
+  * The template has only the Expression Statement defined.  You
+    need to add the Break, Continue, Declaration, For, If, and
+    While statements.
+
+  * These new statements will require the definition of some
+    reserved words, parse routines, and parse tree node class
+    definitions.
+
+#----------------------------------------------------------------------
+Tasks:
+
+  1. Download HMWK_02_dalioba.zip from Canvas.
+
+  2. Unzip the file somewhere convenient.
+
+  3. Change 'dalioba' in the name of the directory to your NetID.
+     (Your NetID is three letters followed by four or five digits.
+      The directory name will now be something like
+      'hmwk_02_abc1234'.)
+
+  4. Look in that directory.
+
+  5. Change the header lines in the provided Python files so that
+     they match your information as follows:
+
+      -- Line 1:  Family name first, then a comma, then
+                  personal name.
+
+      -- Line 2:  Your NetID.
+
+      -- Line 3:  The date you edited the file in the format
+                  YYYY-MM-DD.
+
+  --- IMPORTANT --- IMPORTANT --- IMPORTANT --- IMPORTANT ---
+  --- Do steps 6, 7, 8 for each new statement.  DO NOT try to add
+  --- all of the new statements at once.  Add the statements one
+  --- at a time and ensure that each is working perfectly before
+  --- going on to the next one.
+
+  --- I added the statements in the order break, continue, while,
+  --- for, if, and finally declaration.
+  --- IMPORTANT --- IMPORTANT --- IMPORTANT --- IMPORTANT ---
+
+  6. Add the reserved word(s) required for the next new statement.
+
+  7. Add parse routine(s) for the next new statement.
+
+  8. Add the parse tree node class definition for the next new
+     statement.  (Don't forget to update ParseTree/__init__.py!)
+
+  9. Test the new statement you just added by trying it out on the
+     corresponding test in Tests/.
+
+     DO NOT try to add the next new statement until the one you
+     have just added is working perfectly.
+
+  --- IMPORTANT --- IMPORTANT --- IMPORTANT --- IMPORTANT ---
+  --- Test each added statement using the corresponding .asl file
+  --- in Tests/ before going on to the next statement.
+  --- IMPORTANT --- IMPORTANT --- IMPORTANT --- IMPORTANT ---
+
+ 10. Test your work by running it against all the fabulous and
+     free tests that have been provided for you in the Tests/
+     subdirectory.  You should get output IDENTICAL to that given
+     in the corresponding parse files.
+
+     Be careful to save a copy of those .parse files because when
+     you run the mini Front End, it will overwrite whatever files
+     were there before.
+
+     If your output is the same but has different indention (the
+     number of spaces at the front of the line), this means that
+     you have screwed up the production rules in the parse
+     routines.
+
+ 11. Before uncorking the champagne and celebrating, write some
+     tests of your own and examine how your mini Front End parses
+     them.  The most common error here is to screw up the
+     production rules in the parse routines.  (We didn't change
+     any of the expression definitions so that should be OK.)
+
+#----------------------------------------------------------------------
+Submission:
+
+Make a zipfile of your 'hmwk_02_abc1234' directory (where
+'abc1234' is replaced with YOUR NetID) and submit it on
+Canvas as your results for this assignment.
+
+Your submission should be a zipfile that has exactly one item in
+it, a directory named 'hmwk_02_abc1234' (where 'abc1234' is YOUR
+NetID).  Inside that directory should be the source files for
+your solution.
+
+#----------------------------------------------------------------------
+Hints:
+  1. Ensure your programs compile and run correctly.  Not
+     compiling or not generating the correct output will cost you
+     points.
+
+     Ensure your output messages match the format shown in the
+     sample .parse files in Tests/.  Your output is going to be
+     checked by a program, so it has to match EXACTLY.
+
+     After you write your programs, use diff to compare your
+     output to the supplied .parse files.  It must match EXACTLY
+     or you will be penalized points.
+
+     ('EXACTLY' means character-by-character the same.  No, e.g.,
+      differences in spacing, no changes in wording, no changes
+      in punctuation, and so forth.  Check your output against
+      the supplied .parse files!)
+
+  2. Ensure that you update the three header lines in each of the
+     source files with YOUR name (family name first, then a comma,
+     then your personal name), YOUR NetID, and the date you edit
+     the file (in the format YYYY-MM-DD).
+
+     Not updating the header lines properly will cost you points.
+
+  3. ASL has changed somewhat between HMWK 01 and HMWK 02.  The
+     test cases from HMWK 01 won't work in HMWK 02 because the
+     definition of a Program has been altered to require enclosure
+     in braces, '{' and '}'.  (We will need this when functions
+     are added.)
+
+     Updated versions of the operator tests are included in Tests.
+
+     Other slight tweaks have also been made.  Start from the
+     template provided when completing this assignment.  (It
+     really is in your best interest to do this.)
+
+  4. Dealing with Reserved Words:  Read carefully section 4.3
+     "Specification of Tokens" in the Ply documentation.  Here's a
+     direct link to it:
+
+      https://www.dabeaz.com/ply/ply.html#ply_nn6
+
+     In this section, you'll learn how to use a single rule for ID
+     tokens and then split out the reserved words in the t_ID
+     action routine.
+
+     Do NOT write individual rules for each reserved word;  that
+     way lies madness.
+
+  5. This is not a lot of work.  In the miniFrontEnd.py template,
+
+      * Adding the reserved words for ALL of the new work
+        required only 9 lines of code.
+
+      * The parse routines were this big:
+          3   Break (1 p_ routine)
+          3   Continue (1 p_ routine)
+         10   Declaration statement (2 p_ routines)
+         10   For statement (2 p_ routines)
+         24   If statement (5 p_ routines)
+          3   While statement (1 p_ routine)
+
+      * The ParseTree/ classes are not large.  Here's a wc list
+        for the reference solution's ParseTree subdirectory:
+
+           27    75   743 BinaryOp.py
+           11    30   368 common.py
+           22    55   610 Identifier.py
+           20    66   951 __init__.py
+           23    60   643 Literal.py
+           24    60   629 Program.py
+           21    51   568 Statement_Break.py
+           21    51   577 Statement_Continue.py
+           28    81   837 Statement_Declaration.py
+           24    61   658 Statement_Expression.py
+           32   101  1003 Statement_For.py
+           35   113  1110 Statement_If.py
+           25    67   695 Statement_List.py
+           26    71   745 Statement_While.py
+           22    55   584 Type.py
+           25    65   665 UnaryOp.py
+
+        Remember that there's about 10 lines of boilerplate in
+        each of these files (header comments, blank and divider
+        lines, imports, etc.), so the total amount of code in the
+        __init__() and dump() routines themselves is not all that
+        large.
+
+        The most complex ones are (not surprisingly) Statement_For
+        and Statement_If, since these statements have multiple
+        parts.  On the other hand, Statement_Break and
+        Statement_Continue are as trivial as one can get.
+
+     *>*>*> By the way, it's OK if you use a different number of
+     lines of code in each of these cases, but if you find
+     yourself writing LOTS more code than this, you are probably
+     going down the wrong path and need to rethink how you're
+     doing this assignment.
+
+  6. Here are the signatures for the classes that you have to
+     create for this assignment:
+
+      Statement_Break( lineNum )
+      Statement_Continue( lineNum )
+      Statement_Declaration( lineNum, declType, declID, initExpr )
+      Statement_For( lineNum, loopVar, startExpr, stopExpr, stepExpr, stmtList )
+      Statement_If( lineNum, testExpr, thenStmtList, elifList, elseStmtList )
+      Statement_While( lineNum, testExpr, stmtList )
+      Type( lineNum, kind )
+
+  7. After you complete your work, make up some test cases of your
+     own to ensure that your scanning and parsing really matches
+     what's shown in ASL-version-0.txt.  The test cases in
+     Tests are useful, but they are NOT comprehensive.  Make up
+     some more of your own.
+
+     It's OK to share test cases and expected .parse files with
+     other students, but do NOT violate the Honor Code as regards
+     your programming work.  Do NOT share details of your
+     programming, review other students' work, etc.
+
+  8. Ensure your submission to Canvas is packaged EXACTLY as
+     described above.
+
+      -- Your submission should be a ZIP FILE (not a tar, rar, gz,
+         or any other kind of compressed file).
+
+      -- The zip file should be named 'hmwk_02_abc1234.zip' (with
+         'abc1234' replaced with YOUR NetID).
+
+      -- This zip file should have ONE item in it, a directory
+         named 'hmwk_02_abc1234'  (with 'abc1234' replaced with
+         YOUR NetID).
+
+      -- Your source files should be in that directory, the
+         miniFrontEnd.py and Exceptions.py files and the
+         ParseTree/ subdirectory.
+
+     Submissions in the wrong format score ZERO points.
+
+  9. After you submit your zip file on Canvas, download it from
+     Canvas and check that your submission is in the proper
+     format, that the programs run and produce the correct output,
+     and that you updated the header lines correctly in each of
+     the source files.
+
+ 10. Are you CERTAIN you complied with all of these nit-picking
+     instructions?  Really?  Maybe you ought to check just one
+     more time. :)
+
+#----------------------------------------------------------------------

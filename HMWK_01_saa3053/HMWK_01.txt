@@ -1,0 +1,209 @@
+#----------------------------------------------------------------------
+Programming Assignment 01
+
+#----------------------------------------------------------------------
+Purpose:
+
+  * Demonstrate understanding of lexical and syntactic analysis
+    fundamentals.
+
+  * Demonstrate working Ply environment.
+
+  * Demonstrate (simple) Python programming skills.
+
+#----------------------------------------------------------------------
+Background:
+
+  * The template included with this assignment shows the essential
+    structure for lexical and syntactic analysis stages of a
+    Ply-based scanning and parsing tool.
+
+  * The template has only the binary + operator defined.  The
+    binary -, *, /, %, and ^ operators must be added.  The unary
+    - and + operators must be added.
+
+  * These new operators have the standard precedence and
+    associativity used in mathematics.  (We've gone over this in
+    class and you have the simple desk calculator example to
+    examine.)
+
+#----------------------------------------------------------------------
+Tasks:
+
+  1. Download HMWK_01_dalioba.zip from Canvas.
+
+  2. Unzip the file somewhere convenient.
+
+  3. Change 'dalioba' in the name of the directory to your NetID.
+     (Your NetID is three letters followed by four or five digits.
+      The directory name will now be something like
+      'hmwk_01_abc1234'.)
+
+  4. Look in that directory.
+
+  5. Change the header lines in the provided Python files so that
+     they match your information as follows:
+
+      -- Line 1:  Family name first, then a comma, then
+                  personal name.
+
+      -- Line 2:  Your NetID.
+
+      -- Line 3:  The date you edited the file.
+
+  6. Add token categories for the required new operators by
+     updating the definition of tokens.
+
+  7. Add token representations for the required new operators by
+     making the required t_<whatever> definitions.
+
+  8. Add the required precedence and associativity information for
+     the operators.
+
+  9. Update the p_expression_binop() syntactic function for the
+     new binary operators.
+
+ 10. Create a p_expression_unop() syntactic function for the new
+     unary operators.  (Don't forget to assign the correct
+     precedence for these unary operators using the appropriate
+     %prec directives in the production rule definition.)
+
+ 11. Create the required ParseTree/UnaryOp.py file.  (Make a copy
+     of the ParseTree/BinaryOp.py file and then edit it so it
+     works for unary operators instead of binary operators.)
+
+ 12. Test your work by running it against Tests/testCase_01.asl
+     and Tests/testCase_02.asl.  You should get output IDENTICAL
+     to the provided result files Tests/testCase_01.parse and
+     Tests/testCase_02.parse.
+
+     Be careful to save a copy of those .parse files because when
+     you run the mini Front End, it will overwrite whatever files
+     were there before.
+
+     If your output is the same but has different indention (the
+     number of spaces at the front of the line), this means that
+     you have the WRONG precedence and/or associativity assigned
+     to the operators.  FIX the precedence and/or associativity
+     definitions and the spacing will match.
+
+ 13. Before uncorking the champagne and celebrating, write some
+     tests of your own and examine how your mini Front End parses
+     them.  The most common error here is to screw up the
+     specification of the operator precedence and associativity.
+
+     Precedence and associativity are showed by the indention of
+     the lines in the .parse file.  Your results show match that
+     of the two provided test cases EXACTLY.
+
+     The number of spaces each line is indented is ABSOLUTELY
+     IMPORTANT and should match EXACTLY.  If this spacing does
+     not match, you almost certainly have misspecified the
+     precedence and/or associativity of one or more operators.
+     FIX this and the spacing will match.
+
+#----------------------------------------------------------------------
+Submission:
+
+Make a zipfile of your 'hmwk_01_abc1234' directory (where
+'abc1234' is replaced with YOUR NetID) and submit it on
+Canvas as your results for this assignment.
+
+Your submission should be a zipfile that has exactly one item in
+it, a directory named 'hmwk_01_abc1234' (where 'abc1234' is YOUR
+NetID).  Inside that directory should be the source files for
+your solution.
+
+#----------------------------------------------------------------------
+Hints:
+  1. Ensure your programs compile and run correctly.  Not
+     compiling or not generating the correct output will cost you
+     points.
+
+     Ensure your output messages match the format shown in the
+     sample .parse files in Tests/.  Your output is going to be
+     checked by a program, so it has to match EXACTLY.
+
+     After you write your programs, use diff to compare your
+     output to the supplied .parse files.  It must match EXACTLY
+     or you will be penalized points.
+
+     ('EXACTLY' means character-by-character the same.  No, e.g.,
+      differences in spacing, no changes in wording, no changes
+      in punctuation, and so forth.  Check your output against
+      the supplied .parse files!)
+
+  2. Ensure that you update the three header lines in each of the
+     source files with YOUR name (family name first, then a comma,
+     then your personal name), YOUR NetID, and the date you edit
+     the file.
+
+     Not updating the header lines properly will cost you points.
+
+  3. This is not a lot of work.  In the reference solution, the
+     definition of tokens is 8 lines of code.
+
+     There are 11 single-line t_<whatever> definitions in total.
+
+     The definition of precedence is 7 lines of code.  (Remember
+     that the LOWEST precedence operators go FIRST in this
+     definition.  Check the definition of precedence in the
+     previously-supplied dsk calculator example for hints on how
+     to do this.)
+
+     p_expression_binop()'s production rule definition is 7 lines
+     of code.
+
+     p_expression_unop()'s complete definition is 4 lines of code.
+
+     ParseTree/UnaryOp.py is a straightforward modification of
+     ParseTree/BinaryOp.py.  For one thing, it has no left
+     operand, just a right operand.  The ParseTree/UnaryOp.py
+     file is 25 lines of code.
+
+     *>*>*> By the way, it's OK if you use a different number of
+     lines of code in each of these cases, but if you find
+     yourself writing LOTS more code than this, you are probably
+     going down the wrong path and rethink how you're doing this.
+
+  4. After you complete your work, make up some test cases of your
+     own to ensure that your scanning and parsing really matches
+     the required precedence and associativity.  The test cases in
+     Tests are useful, but they are NOT comprehensive.  Make up
+     some more of your own.
+
+     It's OK to share test cases and expected .parse files with
+     other students, but do NOT violate the Honor Code as regards
+     your programming work.  Do NOT share details of your
+     programming, review other students' work, etc.
+
+  5. Ensure your submission to Canvas is packaged EXACTLY as
+     described above.
+
+      -- Your submission should be a ZIP FILE (not a tar, rar, gz,
+         or any other kind of compressed file).
+
+      -- The zip file should be named 'hmwk_01_abc1234.zip' (with
+         'abc1234' replaced with YOUR NetID).
+
+      -- This zip file should have ONE item in it, a directory
+         named 'hmwk_01_abc1234'  (with 'abc1234' replaced with
+         YOUR NetID).
+
+      -- Your source files should be in that directory, the
+         miniFrontEnd.py and Exceptions.py files and the
+         ParseTree/ subdirectory.
+
+     Submissions in the wrong format score ZERO points.
+
+  6. After you submit your zip file on Canvas, download it from
+     Canvas and check that your submission is in the proper
+     format, that the programs run and produce the correct output,
+     and that you updated the header lines correctly in each of
+     the source files.
+
+  7. Are you CERTAIN you complied with all of these nit-picking
+     instructions?  Really?  Maybe you ought to check just one
+     more time. :)
+
+#----------------------------------------------------------------------
