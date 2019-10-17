@@ -160,7 +160,11 @@ def p_statement_for( p ) :
 # Statement_For( lineNum, loopVar, startExpr, stopExpr, stepExpr, stmtList )
 
 # If statement
-# TODO: Add something here ...
+def p_statement_if( p ) :
+  'statement : IF expression THEN statement_list semicolon_opt elif_list else_opt END IF'
+  p[0] = Statement_If(p.lineno( 1 ), p[2], Statement_List(p.lineno( 4 ), p[4]), Elif_List(0, p[6]), Statement_List(0, p[7]))
+#Statement List for else opt is printing the wrong line number. How to fix???
+#If partc breaks altogether
 
 # While statement
 def p_statement_while( p ) :
@@ -233,10 +237,32 @@ def p_type( p ) :
   'TYPE  : INT'
   p[0] = Type(p.lineno( 1 ), p[1])
 
+# Step function BY
 def p_by_opt( p ) :
   '''by_opt : epsilon
             | BY expression'''
   p[0] = p[1]
+
+#Optional Else
+def p_else_opt( p ) :
+  '''else_opt : epsilon
+              | ELSE statement_list semicolon_opt'''
+  if p[1] is None:
+    p[0] = []
+  else:
+    p[0] = p[2]
+
+#Elif (Else If) Statement
+def p_elif_list( p ) :
+  '''elif_list  : epsilon
+                | elif_list ELIF expression THEN statement_list semicolon_opt'''
+  if p[1] is None:
+    p[0] = []
+  else:
+    p[1].append((p[3], p[5])) 
+    #does this need to be a tuple? part c,d,e are breaking
+    #as a tuple: part a and b break
+    p[0] = p[1]
 
 #-------------------
 # The 'empty' value.  It's possible to just have an empty RHS

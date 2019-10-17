@@ -1,0 +1,12 @@
+(   5) PROGRAM
+(   5)   STATEMENT LIST [1]
+(   7)     STATEMENT (FOR)
+(   7)       LITERAL 'int' 1
+(   7)       LITERAL 'int' 10
+(   8)       STATEMENT LIST [1]
+(   8)         STATEMENT (EXPRESSION)
+(   8)           BINARY_OP '='
+(   8)             IDENTIFIER 'a'
+(   8)             BINARY_OP '^'
+(   8)               IDENTIFIER 'i'
+(   8)               LITERAL 'int' 2
