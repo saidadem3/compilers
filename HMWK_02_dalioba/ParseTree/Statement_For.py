@@ -12,6 +12,7 @@ class Statement_For() :
     self.m_NodeType = 'Statement_While'
 
     self.m_LineNum  = lineNum
+    self.m_ID       = identifier
     self.m_Start    = start
     self.m_Stop     = stop
     self.m_Step     = step
@@ -22,9 +23,10 @@ class Statement_For() :
     dumpHeaderLine( indent, self.m_LineNum,
       'STATEMENT (FOR)', fp )
 
+    self.m_ID.dump( indent+1, fp = fp )    
     self.m_Start.dump( indent+1, fp = fp )
     self.m_Stop.dump( indent+1, fp = fp )
-    # self.m_Step.dump( indent+1, fp = fp )
+    self.m_Step.dump( indent+1, fp = fp )
     self.m_StmtList.dump( indent +1, fp = fp)
 
 #---------#---------#---------#---------#---------#--------#

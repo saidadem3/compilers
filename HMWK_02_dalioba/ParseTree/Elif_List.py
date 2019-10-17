@@ -12,7 +12,7 @@ class Elif_List() :
     self.m_NodeType = 'Elif'
 
     self.m_LineNum  = lineNum
-    self.m_StmtList = stmtList[0][1]
+    self.m_StmtList = stmtList
 
   #---------------------------------------
   def dump( self, indent = 0, fp = sys.stdout ) :

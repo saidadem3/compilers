@@ -152,12 +152,10 @@ def p_statement_expr( p ) :
   'statement : expression'
   p[0] = Statement_Expression( p.lineno( 1 ), p[1] )
 
-
-# For statement (NOT COMPLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEETE!!! FIX AFTER IF)
+# For statement
 def p_statement_for( p ) :
   'statement : FOR identifier EQUALS expression TO expression by_opt DO statement_list semicolon_opt END FOR'
   p[0] = Statement_For( p.lineno( 1 ), p[2], p[4], p[6], p[7], Statement_List(p.lineno( 9 ), p[9]))
-# Statement_For( lineNum, loopVar, startExpr, stopExpr, stepExpr, stmtList )
 
 # If statement
 def p_statement_if( p ) :
@@ -241,7 +239,10 @@ def p_type( p ) :
 def p_by_opt( p ) :
   '''by_opt : epsilon
             | BY expression'''
-  p[0] = p[1]
+  if p[1] is None:
+    p[0] = Literal(0, 'int', 1)
+  else:
+    p[0] = p[2]
 
 #Optional Else
 def p_else_opt( p ) :
