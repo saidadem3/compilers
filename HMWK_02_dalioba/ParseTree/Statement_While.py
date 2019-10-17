@@ -7,17 +7,20 @@ import sys
 from .common       import *
 
 #---------#---------#---------#---------#---------#--------#
-class Literal() :
-  def __init__( self, lineNum, kind, value ) :
-    self.m_NodeType = 'Literal'
+class Statement_While() :
+  def __init__( self, lineNum, expr, stmtList ) :
+    self.m_NodeType = 'Statement_While'
 
     self.m_LineNum  = lineNum
-    self.m_Kind     = kind
-    self.m_Value    = value
+    self.m_Expr     = expr
+    self.m_StmtList = stmtList
 
   #---------------------------------------
   def dump( self, indent = 0, fp = sys.stdout ) :
     dumpHeaderLine( indent, self.m_LineNum,
-      f'LITERAL {self.m_Kind!r} {self.m_Value!r}', fp )
+      'STATEMENT (WHILE)', fp )
+
+    self.m_Expr.dump( indent+1, fp = fp )
+    self.m_StmtList.dump( indent +1, fp = fp)
 
 #---------#---------#---------#---------#---------#--------#

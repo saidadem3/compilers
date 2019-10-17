@@ -1,6 +1,6 @@
-# Dalio, Brian A.
-# dalioba
-# 2019-10-06
+# Adem, Said
+# saa3053
+# 2019-10-16
 #---------#---------#---------#---------#---------#--------#
 import sys
 import traceback
@@ -30,6 +30,9 @@ reserved = {
     'for'       : 'FOR',
     'break'     : 'BREAK',
     'continue'  : 'CONTINUE',
+    'int'       : 'INT',
+    'to'        : 'TO',
+    'by'        : 'BY'
  }
 
 tokens = [
@@ -40,7 +43,7 @@ tokens = [
   'EXPONENTIATION',
   'LPAREN', 'RPAREN', 'SEMICOLON',
   'LBRACE', 'RBRACE'
-  ] + reserved.values()
+  ] + list(reserved.values())
 
 # Tokens
 
@@ -130,27 +133,39 @@ def p_semicolon_opt( p ) :
 
 # Break statement
 def p_statement_break( p ):
-  'statement : break'
+  'statement : BREAK'
+  p[0] = Statement_Break( p.lineno( 1 ))
 
 # Continue statement
-# TODO: Add something here ...
+def p_statement_continue( p ):
+  'statement : CONTINUE'
+  p[0] = Statement_Continue( p.lineno( 1 ))
 
 # Declaration statement
-# TODO: Add something here ...
+def p_declaration_expression ( p ):
+  'statement : TYPE identifier init_opt'
+  p[0] = Statement_Declaration( p.lineno( 1 ), p[1], p[2], p[3])
+  # Statement_Declaration( lineNum, declType, declID, initExpr )
 
 # Expression statement
 def p_statement_expr( p ) :
   'statement : expression'
   p[0] = Statement_Expression( p.lineno( 1 ), p[1] )
 
-# For statement
-# TODO: Add something here ...
+
+# For statement (NOT COMPLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEETE!!! FIX AFTER IF)
+def p_statement_for( p ) :
+  'statement : FOR identifier EQUALS expression TO expression by_opt DO statement_list semicolon_opt END FOR'
+  p[0] = Statement_For( p.lineno( 1 ), p[2], p[4], p[6], p[7], Statement_List(p.lineno( 9 ), p[9]))
+# Statement_For( lineNum, loopVar, startExpr, stopExpr, stepExpr, stmtList )
 
 # If statement
 # TODO: Add something here ...
 
 # While statement
-# TODO: Add something here ...
+def p_statement_while( p ) :
+  'statement : WHILE expression DO statement_list semicolon_opt END WHILE'
+  p[0] = Statement_While( p.lineno( 1 ), p[2], Statement_List(p.lineno(4), p[4]) )
 
 # List of statements separated by semicolons
 def p_statement_list_A( p ) :
@@ -202,6 +217,25 @@ def p_expression_int_literal( p ) :
 # Name
 def p_expression_id( p ) :
   'expression : identifier'
+  p[0] = p[1]
+
+#Optional Expression
+def p_init_opt( p ) :
+  '''init_opt : epsilon
+              | EQUALS expression'''
+  if p[1] is None:
+    p[0] = Literal(0, 'int', 0)
+  else:
+    p[0] = p[2]
+
+# Declaration Type
+def p_type( p ) :
+  'TYPE  : INT'
+  p[0] = Type(p.lineno( 1 ), p[1])
+
+def p_by_opt( p ) :
+  '''by_opt : epsilon
+            | BY expression'''
   p[0] = p[1]
 
 #-------------------
